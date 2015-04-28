@@ -1876,7 +1876,7 @@ config MSM_CPU_FREQ_SET_MIN_MAX
 config ZEN_DECISION
 	bool "Zen Decision MPDecision Replacement"
 	depends on SMP && FB
-	default y
+	default n
 	help
 	  MPDecision is a userspace service that does several functions
 	  related to CPU Frequency and CPU Hotplugging. Some of these are:
