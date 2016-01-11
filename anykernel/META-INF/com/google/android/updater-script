@@ -11,7 +11,7 @@ ui_print(" ");
 +ui_print("        RESURRECTED KERNEL	     ");
 +ui_print(" ------------------------------------");
 +ui_print(" ------------------------------------");
-+ui_print(" ------You Are Installing V3.1 for CM 13-------");
++ui_print(" ------You Are Installing V3.2 for CM 13-------");
 +ui_print(" ------------------------------------");
 +ui_print(" ------------------------------------");
 assert(package_extract_dir("", "/tmp/anykernel"));

@@ -31,6 +31,10 @@
 #ifdef CONFIG_MACH_OPPO
 #include <linux/boot_mode.h>
 #endif //CONFIG_MACH_OPPO
+#ifdef CONFIG_FB_MSM_MDSS
+#include <linux/lcd_notify.h>
+#endif
+
 #define REG_CTRL	0x00
 #define REG_CONFIG	0x01
 #define REG_BRT_A	0x03
@@ -203,6 +207,7 @@ static int lm3630_intr_config(struct lm3630_chip_data *pchip)
 	pr_debug("%s: bl=%d\n", __func__,bl_level);
 
 
+
 #ifdef CONFIG_BACKLIGHT_EXT_CONTROL
 	// if display is switched off
 	if (bl_level == 0) 
@@ -242,6 +247,23 @@ static int lm3630_intr_config(struct lm3630_chip_data *pchip)
 		zzmoove_resume();
 #endif
 
+	}
+#endif
+
+
+#ifdef CONFIG_FB_MSM_MDSS
+	// LDC notifier
+	// if display is switched off
+	if (bl_level == 0) 
+	{
+		lcd_notifier_call_chain(LCD_EVENT_OFF_START, NULL);
+		lcd_notifier_call_chain(LCD_EVENT_OFF_END, NULL);
+	}
+	// if display is switched on
+	if (bl_level != 0 && pre_brightness == 0) 
+	{
+		lcd_notifier_call_chain(LCD_EVENT_ON_START, NULL);
+		lcd_notifier_call_chain(LCD_EVENT_ON_END, NULL);
 	}
 #endif
 
